@@ -14,7 +14,7 @@ public class GCDemo {
         while (true) {
             wasted[rnd.nextInt(wasted.length)] = new SpaceWasted();
             if (count % ONE_MILLION == 0) {
-                System.out.println("*");
+                System.out.print("*");
             }
             count++;
             Thread.sleep(1);
