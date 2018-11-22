@@ -2,7 +2,13 @@ package functional;
 
 import generics.Person;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static generics.Person.olderThan;
+import static generics.Person.youngerThan;
 
 public class Task3 {
     public static void main(String[] args) {
@@ -18,9 +24,18 @@ public class Task3 {
                 new Person("Allen ", "Whyte", 11, 20),
                 new Person("Megan ", "Couche", 9, 30),
                 new Person("Daphne ", "Justice", 34, 1500));
+
+        DoubleSummaryStatistics salaryStatistics = people.stream()
+                .filter(youngerThan(18).negate())
+                .filter(olderThan(60).negate())
+                .peek(System.out::println)
+                .collect(Collectors.summarizingDouble(Person::getSalary));
+
+        System.out.println(salaryStatistics);
     }
+
 //    TODO
-//    Filter people younger than 18y and older than 60y
+//    Remove people younger than 18y and older than 60y
 //    Calculate statistics for the rest of the group
 
 }
